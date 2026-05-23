@@ -1,8 +1,9 @@
 import { redirect } from 'next/navigation'
+import { createClient } from '@/lib/supabase/server'
 import Sidebar from '@/components/Sidebar'
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  // Validate env vars early
+  // Validate env vars
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
     return (
       <div style={{
@@ -20,22 +21,20 @@ export default async function AdminLayout({ children }: { children: React.ReactN
             El panel no puede conectarse a Supabase porque faltan las variables de entorno.
           </p>
           <div style={{ background: '#0B0F12', borderRadius: '8px', padding: '1rem', marginBottom: '1rem' }}>
-            <p style={{ color: '#94a3b8', fontSize: '0.85rem', margin: '0 0 0.5rem' }}>Agregá estas variables en Vercel → Settings → Environment Variables:</p>
+            <p style={{ color: '#94a3b8', fontSize: '0.85rem', margin: '0 0 0.5rem' }}>
+              Agregá estas variables en Vercel → Settings → Environment Variables:
+            </p>
             <code style={{ display: 'block', color: '#20B26B', fontSize: '0.85rem', lineHeight: 1.8 }}>
               NEXT_PUBLIC_SUPABASE_URL<br />
               NEXT_PUBLIC_SUPABASE_ANON_KEY
             </code>
           </div>
-          <p style={{ color: '#64748b', fontSize: '0.8rem', margin: 0 }}>
-            Después de agregar las variables, hacé un nuevo deploy en Vercel.
-          </p>
         </div>
       </div>
     )
   }
 
   try {
-    const { createClient } = await import('@/lib/supabase/server')
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) redirect('/login')

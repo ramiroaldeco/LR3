@@ -145,15 +145,7 @@ export default function ClubesPage() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                 <div
                   onClick={() => fileRef.current?.click()}
-                  style={{
-                    width: '72px', height: '72px', borderRadius: '10px',
-                    border: '2px dashed #2a3a4a', cursor: 'pointer',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    overflow: 'hidden', flexShrink: 0, background: '#111827',
-                    transition: 'border-color 0.2s',
-                  }}
-                  onMouseEnter={e => (e.currentTarget.style.borderColor = '#20B26B')}
-                  onMouseLeave={e => (e.currentTarget.style.borderColor = '#2a3a4a')}
+                  className="shield-upload-btn"
                 >
                   {shieldPreview ? (
                     <img src={shieldPreview} alt="Shield" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />

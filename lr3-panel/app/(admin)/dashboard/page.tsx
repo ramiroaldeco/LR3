@@ -53,39 +53,16 @@ export default async function DashboardPage() {
         ))}
       </div>
 
-      {/* Quick access */}
+      {/* Quick access — CSS-only hover via .quick-card class */}
       <h2 style={{ fontSize: '1rem', fontWeight: 600, color: '#94a3b8', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
         Acceso rápido
       </h2>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
         {accesos.map(a => (
-          <a
-            key={a.href}
-            href={a.href}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '0.5rem',
-              padding: '1.25rem',
-              background: '#1a2332',
-              border: '1px solid #2a3a4a',
-              borderRadius: '12px',
-              textDecoration: 'none',
-              transition: 'all 0.2s',
-              cursor: 'pointer',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.borderColor = '#20B26B'
-              e.currentTarget.style.transform = 'translateY(-2px)'
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.borderColor = '#2a3a4a'
-              e.currentTarget.style.transform = 'translateY(0)'
-            }}
-          >
-            <span style={{ fontSize: '1.5rem' }}>{a.icon}</span>
-            <span style={{ fontWeight: 600, color: '#fff', fontSize: '0.9rem' }}>{a.label}</span>
-            <span style={{ color: '#64748b', fontSize: '0.8rem' }}>{a.desc}</span>
+          <a key={a.href} href={a.href} className="quick-card">
+            <span className="quick-card-icon">{a.icon}</span>
+            <span className="quick-card-title">{a.label}</span>
+            <span className="quick-card-desc">{a.desc}</span>
           </a>
         ))}
       </div>
